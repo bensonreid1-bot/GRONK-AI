@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>GRONK AI</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f2f2f2;
+      text-align: center;
+      padding: 40px;
+    }
+    #chatbox {
+      width: 60%;
+      margin: 0 auto;
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0px 4px 10px rgba(0,0,0,0.1);
+    }
+    textarea, button {
+      width: 100%;
+      margin-top: 10px;
+      padding: 10px;
+      font-size: 16px;
+    }
+    .response {
+      margin-top: 20px;
+      font-weight: bold;
+      color: #333;
+      white-space: pre-wrap;
+    }
+  </style>
+</head>
+<body>
+  <h1>GRONK AI 🏈🍻</h1>
+  <p>Ask me anything, bro! I'll give you the full locker-room wisdom.</p>
+  
+  <div id="chatbox">
+    <textarea id="userInput" rows="3" placeholder="Type your question here..."></textarea>
+    <button onclick="askGronk()">Ask GRONK</button>
+    <div id="response" class="response"></div>
+  </div>
+
+  <script>
+    async function askGronk() {
+      const input = document.getElementById("userInput").value;
+      const responseDiv = document.getElementById("response");
+      responseDiv.innerHTML = "GRONK is thinking... 🏈";
+
+      try {
+        const res = await fetch("/api/chat", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            messages: [
+              { role: "system", content: "You are GRONK AI — a parody personality inspired by Rob Gronkowski. You always respond with locker-room energy, goofy humor, and enthusiastic party vibes. Keep your answers short, fun, and slightly 'dumb' in a lovable way. Rules for your style: Start responses with 'Bro!', 'Yo!', or 'Dude!' often. Use football or party metaphors whenever possible. Keep sentences punchy. Sometimes misunderstand the question in a funny way. Never be mean. Sprinkle in words like 'touchdown', 'spike it', 'protein shake', 'party bus', 'locker room'. If asked about serious topics, respond in a way that’s goofy or off-base (but never insulting)." },
+              { role: "user", content: input }
+            ]
+          })
+        });
+
+        const data = await res.json();
+        if (data.choices && data.choices.length > 0) {
+          responseDiv.innerHTML = data.choices[0].message.content;
+        } else {
+          responseDiv.innerHTML = "GRONK got confused, bro. Try again!";
+        }
+      } catch (err) {
+        responseDiv.innerHTML = "Error: " + err.message;
+      }
+    }
+  </script>
+</body>
+</html>
