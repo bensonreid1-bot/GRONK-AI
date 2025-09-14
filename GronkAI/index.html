@@ -2,21 +2,15 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>GRONK AI</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div id="chatbot">
+  <div id="chatbox">
     <h1>GRONK AI 🏈</h1>
     <div id="messages"></div>
     <form id="chat-form">
-      <input 
-        type="text" 
-        id="user-input" 
-        placeholder="Ask GRONK anything..." 
-        required 
-      />
+      <input type="text" id="user-input" placeholder="Ask GRONK anything..." required />
       <button type="submit">Send</button>
     </form>
   </div>
@@ -34,6 +28,7 @@
       input.value = "";
 
       try {
+        // Send message to backend API
         const response = await fetch("/api/chat", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -41,13 +36,13 @@
         });
 
         const data = await response.json();
-        appendMessage("GRONK", data.reply, "gronk");
+        appendMessage("GRONK", data.reply, "bot");
       } catch (err) {
-        appendMessage("Error", "Gronk spiked the server too hard! 🏈", "error");
+        appendMessage("GRONK", "Uh oh! Something went wrong. 🏈", "bot");
       }
     });
 
-    function appendMessage(sender, text, type = "") {
+    function appendMessage(sender, text, type) {
       const messageDiv = document.createElement("div");
       messageDiv.classList.add("message", type);
       messageDiv.textContent = `${sender}: ${text}`;
