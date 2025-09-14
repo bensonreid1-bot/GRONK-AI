@@ -4,11 +4,30 @@
   <meta charset="UTF-8">
   <title>GRONK AI</title>
   <link rel="stylesheet" href="style.css">
+  <style>
+    /* Quick inline styles for typing indicator */
+    #typing {
+      display: none;
+      font-style: italic;
+      color: #ccc;
+      margin: 10px;
+      text-align: left;
+    }
+    #typing span {
+      animation: blink 1.5s infinite;
+    }
+    @keyframes blink {
+      0% { opacity: 0.2; }
+      20% { opacity: 1; }
+      100% { opacity: 0.2; }
+    }
+  </style>
 </head>
 <body>
   <div id="chatbox">
     <h1>GRONK AI 🏈</h1>
     <div id="messages"></div>
+    <div id="typing">GRONK is thinking<span>...</span></div>
     <form id="chat-form">
       <input type="text" id="user-input" placeholder="Ask GRONK anything..." required />
       <button type="submit">Send</button>
@@ -19,6 +38,7 @@
     const form = document.getElementById("chat-form");
     const input = document.getElementById("user-input");
     const messages = document.getElementById("messages");
+    const typingIndicator = document.getElementById("typing");
 
     form.addEventListener("submit", async (e) => {
       e.preventDefault();
@@ -26,6 +46,9 @@
       const userMessage = input.value;
       appendMessage("You", userMessage, "user");
       input.value = "";
+
+      // Show typing indicator
+      typingIndicator.style.display = "block";
 
       try {
         // Send message to backend API
@@ -36,8 +59,12 @@
         });
 
         const data = await response.json();
+
+        // Hide typing indicator and show GRONK reply
+        typingIndicator.style.display = "none";
         appendMessage("GRONK", data.reply, "bot");
       } catch (err) {
+        typingIndicator.style.display = "none";
         appendMessage("GRONK", "Uh oh! Something went wrong. 🏈", "bot");
       }
     });
