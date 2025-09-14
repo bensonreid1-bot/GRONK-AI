@@ -1,0 +1,123 @@
+/* Reset some defaults */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(135deg, #111 0%, #222 100%);
+  color: #f5f5f5;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+#chatbot {
+  width: 90%;
+  max-width: 800px;
+  height: 90vh;
+  background: #1e1e1e;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* Header */
+#chatbot h1 {
+  background: #ffcc00;
+  color: #222;
+  font-size: 1.5rem;
+  font-weight: bold;
+  padding: 1rem;
+  text-align: center;
+  letter-spacing: 2px;
+  border-bottom: 3px solid #444;
+  text-transform: uppercase;
+}
+
+/* Messages area */
+#messages {
+  flex: 1;
+  padding: 1rem;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.message {
+  padding: 0.75rem 1rem;
+  border-radius: 10px;
+  max-width: 75%;
+  line-height: 1.4;
+  font-size: 0.95rem;
+}
+
+/* User messages */
+.message.user {
+  background: #ffcc00;
+  color: #222;
+  align-self: flex-end;
+  font-weight: bold;
+}
+
+/* AI messages */
+.message.ai {
+  background: #333;
+  color: #f5f5f5;
+  align-self: flex-start;
+  border-left: 4px solid #ffcc00;
+}
+
+/* Input area */
+form {
+  display: flex;
+  border-top: 2px solid #333;
+}
+
+input {
+  flex: 1;
+  padding: 1rem;
+  border: none;
+  outline: none;
+  font-size: 1rem;
+  background: #2a2a2a;
+  color: #f5f5f5;
+}
+
+input::placeholder {
+  color: #aaa;
+}
+
+button {
+  padding: 1rem 1.5rem;
+  background: #ffcc00;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+  color: #222;
+  transition: background 0.2s ease;
+}
+
+button:hover {
+  background: #ffdb4d;
+}
+
+/* Scrollbar styling */
+#messages::-webkit-scrollbar {
+  width: 8px;
+}
+
+#messages::-webkit-scrollbar-thumb {
+  background: #555;
+  border-radius: 4px;
+}
+
+#messages::-webkit-scrollbar-track {
+  background: #222;
+}
