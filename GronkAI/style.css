@@ -1,0 +1,104 @@
+/* Global styles */
+body {
+  font-family: 'Arial Black', sans-serif;
+  background: linear-gradient(135deg, #013369, #d50a0a); /* Patriots/Bucs colors */
+  color: white;
+  margin: 0;
+  padding: 0;
+}
+
+/* Main app container */
+.app {
+  max-width: 600px;
+  margin: 40px auto;
+  background: #111;
+  border-radius: 12px;
+  box-shadow: 0 0 20px rgba(0,0,0,0.5);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  height: 80vh;
+}
+
+/* Header styles */
+header {
+  text-align: center;
+  padding: 1rem;
+  background: #222;
+  border-bottom: 2px solid #444;
+}
+
+header h1 {
+  margin: 0;
+  font-size: 1.8rem;
+  color: #ffcc00; /* gold accent */
+}
+
+header p {
+  margin: 0.25rem 0 0;
+  font-size: 0.9rem;
+  color: #bbb;
+}
+
+/* Chat area */
+.chat-window {
+  flex: 1;
+  padding: 1rem;
+  overflow-y: auto;
+  background: #1e1e1e;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Chat messages */
+.message {
+  padding: 0.75rem 1rem;
+  margin: 0.5rem 0;
+  border-radius: 8px;
+  max-width: 80%;
+  line-height: 1.4;
+  word-wrap: break-word;
+}
+
+.message.user {
+  background: #0047ab; /* blue bubble */
+  color: white;
+  align-self: flex-end;
+}
+
+.message.bot {
+  background: #333;
+  color: #ffcc00; /* gold text */
+  align-self: flex-start;
+}
+
+/* Input form */
+form {
+  display: flex;
+  border-top: 2px solid #444;
+}
+
+input {
+  flex: 1;
+  padding: 0.75rem;
+  border: none;
+  outline: none;
+  font-size: 1rem;
+  background: #222;
+  color: white;
+}
+
+button {
+  padding: 0.75rem 1.25rem;
+  background: #d50a0a; /* Bucs red */
+  border: none;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+button:hover {
+  background: #ffcc00;
+  color: black;
+}
