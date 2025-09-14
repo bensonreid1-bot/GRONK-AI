@@ -2,15 +2,21 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>GRONK AI</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div id="chatbox">
+  <div id="chatbot">
     <h1>GRONK AI 🏈</h1>
     <div id="messages"></div>
     <form id="chat-form">
-      <input type="text" id="user-input" placeholder="Ask GRONK anything..." required />
+      <input 
+        type="text" 
+        id="user-input" 
+        placeholder="Ask GRONK anything..." 
+        required 
+      />
       <button type="submit">Send</button>
     </form>
   </div>
@@ -24,24 +30,29 @@
       e.preventDefault();
 
       const userMessage = input.value;
-      appendMessage("You", userMessage);
+      appendMessage("You", userMessage, "user");
       input.value = "";
 
-      // Send message to backend API
-      const response = await fetch("/api/chat", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ message: userMessage })
-      });
+      try {
+        const response = await fetch("/api/chat", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ message: userMessage })
+        });
 
-      const data = await response.json();
-      appendMessage("GRONK", data.reply);
+        const data = await response.json();
+        appendMessage("GRONK", data.reply, "gronk");
+      } catch (err) {
+        appendMessage("Error", "Gronk spiked the server too hard! 🏈", "error");
+      }
     });
 
-    function appendMessage(sender, text) {
+    function appendMessage(sender, text, type = "") {
       const messageDiv = document.createElement("div");
+      messageDiv.classList.add("message", type);
       messageDiv.textContent = `${sender}: ${text}`;
       messages.appendChild(messageDiv);
+      messages.scrollTop = messages.scrollHeight; // auto-scroll
     }
   </script>
 </body>
